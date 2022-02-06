@@ -1,0 +1,61 @@
+CREATE TABLE "USER"
+(
+  UserName INT NOT NULL,
+  Password INT NOT NULL,
+  Email INT NOT NULL,
+  Phone INT NOT NULL,
+  Role INT NOT NULL,
+  UserID INT NOT NULL,
+  PRIMARY KEY (UserID),
+  UNIQUE (UserName)
+);
+
+CREATE TABLE "COMMUNITY"
+(
+  CommunityName INT NOT NULL,
+  Description INT NOT NULL,
+  CommunityID INT NOT NULL,
+  CreateDate INT NOT NULL,
+  PRIMARY KEY (CommunityID),
+  UNIQUE (CommunityName)
+);
+
+CREATE TABLE "POST"
+(
+  PostID INT NOT NULL,
+  PostContent INT NOT NULL,
+  VoteScore INT NOT NULL,
+  PostDate INT NOT NULL,
+  CommunityID INT NOT NULL,
+  UserID INT NOT NULL,
+  PRIMARY KEY (PostID),
+  FOREIGN KEY (UserID) REFERENCES "USER"(UserID),
+  FOREIGN KEY (CommunityID) REFERENCES "COMMUNITY"(CommunityID)
+);
+
+CREATE TABLE "MEMBEROF"
+(
+  CommunityRole INT NOT NULL,
+  RelationID INT NOT NULL,
+  UserID INT NOT NULL,
+  CommunityID INT NOT NULL,
+  PRIMARY KEY (RelationID),
+  FOREIGN KEY (UserID) REFERENCES "USER"(UserID),
+  FOREIGN KEY (CommunityID) REFERENCES "COMMUNITY"(CommunityID),
+  UNIQUE (UserID, CommunityID)
+);
+
+CREATE TABLE "COMMENT"
+(
+  CommentID INT NOT NULL,
+  CommentText INT NOT NULL,
+  VoteScore INT NOT NULL,
+  CommentDate INT NOT NULL,
+  UserID INT NOT NULL,
+  PostID INT NOT NULL,
+  Parent_CommentID INT,
+  PRIMARY KEY (CommentID),
+  FOREIGN KEY (UserID) REFERENCES "USER"(UserID),
+  FOREIGN KEY (PostID) REFERENCES "POST"(PostID),
+  FOREIGN KEY (Parent_CommentID) REFERENCES "COMMENT"(CommentID)
+);
