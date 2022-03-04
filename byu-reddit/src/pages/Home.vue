@@ -2,12 +2,16 @@
   <div>
     <b-jumbotron>
       <p>Welcome to BYU Reddit!</p>
+      <b-button href="/#/Login">
+        Login
+      </b-button>
     </b-jumbotron>
+    
     <br />
     <div v-if="loading">Loading Posts....</div>
     <ul v-else>
       <li v-for="post in posts" :key="post.postid">
-        <router-link :to="`POST/${post.postid}`">{{
+        <router-link :to="`Community/${post.communityid}/${post.postid}`">{{
           post.postcontent
         }}</router-link>
       </li>
