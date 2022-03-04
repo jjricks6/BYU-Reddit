@@ -1,51 +1,25 @@
 import axios from "axios";
 import { authHeader, getJwtToken, getUserIdFromToken } from "./auth";
 
-const API_URL = "http://localhost:8000";
+const API_URL = "http://50.112.37.217:8000";
 
 class Api {
-  getArticles() {
-    return axios.get(API_URL + "/articles", {});
+  getFeed() {
+    return axios.get(API_URL + "/feed", {});
   }
 
-  getArticleDetail(id) {
-    return axios.get(API_URL + `/articles?articleid=eq.${id}`);
+  getPost(id) {
+    return axios.get(API_URL + `/POST?postid=eq.${id}`);
   }
 
-  addArticle(article) {
+  addPost(post) {
     return axios.post(
-      API_URL + "/articles",
+      API_URL + "/POST",
       {
-        ...article,
+        ...post,
         // add user id from JWT token
         userid: getUserIdFromToken(getJwtToken()),
       },
-      {
-        headers: authHeader(),
-      }
-    );
-  }
-
-  updateArticle(article) {
-    return axios.patch(
-      API_URL + `/articles?articleid=eq.${article.articleid}`,
-      article,
-      {
-        headers: authHeader(),
-      }
-    );
-  }
-
-  deleteArticle(id) {
-    return axios.delete(API_URL + `/articles?articleid=eq.${id}`, {
-      headers: authHeader(),
-    });
-  }
-
-  publishArticle(id) {
-    return axios.post(
-      API_URL + "/rpc/publish",
-      { id: id },
       {
         headers: authHeader(),
       }
