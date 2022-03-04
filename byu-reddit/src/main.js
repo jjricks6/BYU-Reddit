@@ -12,7 +12,7 @@ import Logout from "./pages/Logout";
 import Register from "./pages/Register";
 import Community from "./pages/Community";
 import Profile from "./pages/Profile";
-import Search from "./pages/Profile";
+import Search from "./pages/Search";
 import AdminArticleAdd from "./components/AdminArticleAdd";
 import AdminArticleList from "./components/AdminArticleList";
 import AdminArticleEdit from "./components/AdminArticleEdit";

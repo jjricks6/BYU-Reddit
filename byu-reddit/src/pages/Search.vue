@@ -19,7 +19,7 @@
 import Api from "../api";
 
 export default {
-  name: "HomePage",
+  name: "SearchPage",
   data: function () {
     return {
       loading: false,
