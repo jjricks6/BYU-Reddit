@@ -6,7 +6,6 @@ import App from "./App.vue";
 import Home from "./pages/Home";
 import Feed from "./pages/Feed";
 import Explore from "./pages/Explore";
-import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Register from "./pages/Register";
@@ -43,18 +42,17 @@ const checkAuth = function(to, _, next) {
 const router = new VueRouter({
   routes: [
     { path: "/", component: Home },
-    { path: "/community/:id", component: Community },
+    { path: "/c/:id", component: Community },
     { path: "/login", component: Login },
     { path: "/logout", component: Logout },
     { path: "/register", component: Register },
-    { path: "/profile", component: Profile },
-    { path: "/feed", component: Feed },
+    { path: "/p/:id", component: Profile },
     { path: "/explore", component: Explore },
     { path: "/search", component: Search },
 
     {
-      path: "/admin",
-      component: Admin,
+      path: "/feed",
+      component: Feed,
       beforeEnter: checkAuth,
       children: [
         { path: "add", component: AdminArticleAdd },

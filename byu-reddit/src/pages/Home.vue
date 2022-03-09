@@ -11,8 +11,8 @@
     <div v-if="loading">Loading Posts....</div>
     <ul v-else>
       <li v-for="post in posts" :key="post.postid">
-        <router-link :to="`Community/${post.communityid}/${post.postid}`">{{
-          post.postcontent
+        <router-link :to="`Community/${post.communityname}/${post.postid}`">{{
+          post.posttitle
         }}</router-link>
       </li>
     </ul>
@@ -27,12 +27,12 @@ export default {
   data: function () {
     return {
       loading: false,
-      posts: [],
+      posts: []
     };
   },
   created: function () {
     this.loading = true;
-    Api.getFeed().then((res) => {
+    Api.getExplore().then((res) => {
       this.posts = res.data;
       this.loading = false;
     });

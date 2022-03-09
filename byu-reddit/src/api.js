@@ -5,7 +5,10 @@ const API_URL = "http://50.112.37.217:8000";
 
 class Api {
   getFeed() {
-    return axios.get(API_URL + "/feed", {});
+    return axios.get(API_URL + `/feed?userid=eq.1`);
+  }
+  getExplore() {
+    return axios.get(API_URL + `/explore`);
   }
 
   getPost(id) {
