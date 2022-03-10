@@ -1,33 +1,46 @@
+/* eslint-disable */
+
 <template>
-  <div>
-    <b-jumbotron>
-      <p>Welcome to BYU Reddit!</p>
-      <b-button href="/#/Login">
-        Login
-      </b-button>
-    </b-jumbotron>
-    
-    <br />
-    <div v-if="loading">Loading Posts....</div>
-    <ul v-else>
-      <li v-for="post in posts" :key="post.postid">
-        <router-link :to="`Community/${post.communityname}/${post.postid}`">{{
-          post.posttitle
-        }}</router-link>
-      </li>
-    </ul>
-  </div>
+  <v-card class="overflow-hidden">
+    <v-sheet
+      id="scrolling-techniques-7"
+      class="overflow-y-auto"
+    >
+      <v-container >
+        <v-row>
+        <!-- Filter -->
+          <v-col cols='3'>
+            <v-select
+              :items="filter_items"
+              default="hot"
+              dense
+              prepend-icon="mdi-fire"
+            ></v-select>
+          </v-col>
+        </v-row>
+        <!-- We need to figure out how to load more as you scroll-->
+        <Post/>
+        <Post/>
+        <Post/>
+      </v-container>
+    </v-sheet>
+  </v-card>
 </template>
 
 <script>
 import Api from "../api";
+import Post from "../components/Post.vue"
 
 export default {
+  components:{
+    Post
+  },
   name: "HomePage",
   data: function () {
     return {
       loading: false,
-      posts: []
+      posts: [],
+      filter_items: ["Top", "Popular"]
     };
   },
   created: function () {
