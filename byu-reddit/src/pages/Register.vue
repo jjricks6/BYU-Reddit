@@ -56,6 +56,7 @@
 
 <script>
 import Api from "../api";
+import { required, minLength } from 'vuelidate/lib/validators';
 export default {
   name: "RegisterPage",
   data() {
@@ -66,6 +67,18 @@ export default {
       loading: false,
       message: "",
     };
+  },
+  validations: {
+    form: {
+      userName: {
+        required,
+        minLength: minLength(5)
+      },
+      password: {
+        required,
+        minLength: minLength(12)
+      }
+    }
   },
   methods: {
     handleRegister() {
