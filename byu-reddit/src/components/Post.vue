@@ -13,7 +13,7 @@
         <v-row dense>
           <v-col>
             <v-card-title>{{ title }}</v-card-title>
-            <v-card-subtitle>{{ community}} </v-card-subtitle>
+            <v-card-subtitle>{{ community }} </v-card-subtitle>
           </v-col>
         </v-row>
       </v-col>
@@ -47,16 +47,21 @@
 </template>
 
 <script>
+
 export default {
+  props: {
+    title: String,
+    content: String,
+    community: String,
+    community_picture: String,
+    time_posted: String,
+    vote_score: Number,
+    num_comments: Number
+  },
+
   data() {
     return {
-      title: 'Title',
-      content: 'f12020.jpg',
-      community: 'test_community',
-      community_picture: 'f12020.jpg',
-      time_posted: '5m ago',
-      vote_score: '0',
-      num_comments: '0'
+      
     }
   }
 }
