@@ -12,15 +12,13 @@ import Register from "./pages/Register";
 import Community from "./pages/Community";
 import Profile from "./pages/Profile";
 import Search from "./pages/Search";
-import AdminArticleAdd from "./components/AdminArticleAdd";
-import AdminArticleList from "./components/AdminArticleList";
-import AdminArticleEdit from "./components/AdminArticleEdit";
 
 Vue.config.productionTip = false;
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import { getJwtToken } from "./auth";
+import vuetify from './plugins/vuetify'
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -55,9 +53,6 @@ const router = new VueRouter({
       component: Feed,
       beforeEnter: checkAuth,
       children: [
-        { path: "add", component: AdminArticleAdd },
-        { path: "edit/:id", component: AdminArticleEdit },
-        { path: "", component: AdminArticleList },
       ],
     },
   ],
@@ -65,5 +60,6 @@ const router = new VueRouter({
 
 new Vue({
   router,
-  render: (h) => h(App),
+  vuetify,
+  render: (h) => h(App)
 }).$mount("#app");
