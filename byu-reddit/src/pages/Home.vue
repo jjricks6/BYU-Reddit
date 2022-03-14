@@ -19,9 +19,18 @@
           </v-col>
         </v-row>
         <!-- We need to figure out how to load more as you scroll-->
-        <Post/>
-        <Post/>
-        <Post/>
+        <div v-for="post in posts" :key="post.id"
+        >
+          <Post
+            :title="post.posttitle"
+            :content="post.postcontent"
+            :community="post.communityname"
+            :community_picture="post.communitypicture"
+            :time_posted="post.postdatetime"
+            :vote_score="post.votescore"
+            :num_comments="post.num_comments"
+          />
+        </div>
       </v-container>
     </v-sheet>
   </v-card>
