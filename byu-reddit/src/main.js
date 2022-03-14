@@ -44,7 +44,7 @@ const router = new VueRouter({
     { path: "/login", component: Login },
     { path: "/logout", component: Logout },
     { path: "/register", component: Register },
-    { path: "/p/:id", component: Profile },
+    { path: "/profile", component: Profile },
     { path: "/explore", component: Explore },
     { path: "/search", component: Search },
 
