@@ -16,7 +16,7 @@ class Api {
   }
 
   getPost(id) {
-    return axios.get(API_URL + `/POST?postid=eq.${id}`);
+    return axios.get(API_URL + `/post?postid=eq.${id}`);
   }
 
   addPost(post) {

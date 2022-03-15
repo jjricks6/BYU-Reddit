@@ -13,6 +13,7 @@ import Register from "./pages/Register";
 import Community from "./pages/Community";
 import Profile from "./pages/Profile";
 import Search from "./pages/Search";
+import Post from "./pages/Post";
 
 Vue.config.productionTip = false;
 Vue.use(Vuex)
@@ -49,6 +50,7 @@ const router = new VueRouter({
     { path: "/profile", component: Profile },
     { path: "/explore", component: Explore },
     { path: "/search", component: Search },
+    { path: "/Community/:id", component: Post },
 
     {
       path: "/feed",
