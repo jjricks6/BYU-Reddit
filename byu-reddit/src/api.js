@@ -11,6 +11,10 @@ class Api {
     return axios.get(API_URL + `/explore`);
   }
 
+  getUser(email) {
+    return axios.get(API_URL + `/USER?email=eq.${email}`);
+  }
+
   getPost(id) {
     return axios.get(API_URL + `/POST?postid=eq.${id}`);
   }

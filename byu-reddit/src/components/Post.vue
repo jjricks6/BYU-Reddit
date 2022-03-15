@@ -49,6 +49,18 @@
 <script>
 
 export default {
+  methods:{
+    date_function: function () {
+      var currentDate = new Date();
+      console.log(currentDate);
+  
+      var formatted_date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+      console.log(formatted_date);
+    },
+    mounted () {
+      this.date_function()
+    }
+  },
   props: {
     title: String,
     content: String,

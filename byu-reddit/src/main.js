@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import Vuex from 'vuex'
 
 import App from "./App.vue";
 import Home from "./pages/Home";
@@ -14,6 +15,7 @@ import Profile from "./pages/Profile";
 import Search from "./pages/Search";
 
 Vue.config.productionTip = false;
+Vue.use(Vuex)
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
@@ -58,8 +60,30 @@ const router = new VueRouter({
   ],
 });
 
+Vue.prototype.$user = null
+
+const store = new Vuex.Store({
+  state: {
+    user: undefined,
+  },
+  mutations: {
+      setUser(state, user) {
+          state.user = user
+      },
+  },
+  actions: {
+    async updateUser(user) {
+      this.commit('setUser', user)
+    }
+  }
+})
+
 new Vue({
+  store,
   router,
   vuetify,
-  render: (h) => h(App)
+  render: (h) => h(App),
+  created: () => {
+    store.dispatch('updateUser')
+}
 }).$mount("#app");
