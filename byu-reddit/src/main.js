@@ -66,12 +66,20 @@ Vue.prototype.$user = null
 
 const store = new Vuex.Store({
   state: {
-    user: undefined,
+    user: -1,
+  },
+  getters: {
+    getState(state) {
+      return state.user
+    }
   },
   mutations: {
       setUser(state, user) {
           state.user = user
       },
+      logout(state) {
+        state.user = -1
+      }
   },
   actions: {
     async updateUser(user) {

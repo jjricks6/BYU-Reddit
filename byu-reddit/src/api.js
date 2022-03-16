@@ -18,8 +18,8 @@ class Api {
   getPost(id) {
     return axios.get(API_URL + `/post?postid=eq.${id}`);
   }
-  getProfile() {
-    return axios.get(API_URL + `/USER?userid=eq.${3}`);
+  getProfile(username) {
+    return axios.get(API_URL + `/USER?username=eq.${username}`);
   }
 
   getCommunity(name) {

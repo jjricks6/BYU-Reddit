@@ -8,6 +8,11 @@
     >
       <v-container >
         <v-row>
+          <v-card-title>
+            Explore
+          </v-card-title>
+        </v-row>
+        <v-row>
         <!-- Filter -->
           <v-col cols='3'>
             <v-select

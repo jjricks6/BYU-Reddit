@@ -17,11 +17,16 @@
       </v-btn>
 
       <!-- Profile -->
-      <v-btn v-if="isLoggedIn" icon @click="profilePage()">
-        <v-avatar>
-          <img :src="'https://byu-reddit-media.s3.us-west-2.amazonaws.com/' + this.$store.state.user.profilepicture"/>
-        </v-avatar>
-      </v-btn>
+      <div v-if="isLoggedIn">
+        <v-btn plain @click="logout()">
+          Logout
+        </v-btn>
+        <v-btn icon @click="profilePage()">
+          <v-avatar>
+            <img :src="'https://byu-reddit-media.s3.us-west-2.amazonaws.com/' + this.$store.state.user.profilepicture"/>
+          </v-avatar>
+        </v-btn>
+      </div>
       <div v-else>
         <v-btn @click="loginPage()">
           Login
@@ -45,7 +50,8 @@
 <script>
 export default {
   computed: {
-    isLoggedIn : function(){ return this.$store.state.user != undefined }
+    isLoggedIn : function(){
+      return this.$store.state.user.username != undefined }
   },
   methods:{
     loginPage(){
@@ -58,7 +64,7 @@ export default {
       this.$router.push('/')
     },
     async logout (){
-        await this.$store.dispatch('LogOut')
+        this.$store.commit('logout')
         this.$router.push('/login')
       }
   },
