@@ -12,8 +12,8 @@
       <v-col cols=10>
         <v-row dense>
           <v-col>
-            <v-card-title @click="goToPost(id)">{{ title }}</v-card-title>
-            <v-card-subtitle>{{ community }} </v-card-subtitle>
+            <v-card-title @click="goToPost(community, id)">{{ title }}</v-card-title>
+            <v-card-subtitle @click="goToUser(community)">{{ community }} </v-card-subtitle>
           </v-col>
         </v-row>
       </v-col>
@@ -37,9 +37,7 @@
       </v-col>
       <v-col>
         {{ num_comments }}
-        <v-btn icon>
-          <v-icon>mdi-comment-text-outline</v-icon>
-        </v-btn>
+        <v-icon>mdi-comment-text-outline</v-icon>
       </v-col>
     </v-row>
     </v-container>
@@ -58,7 +56,10 @@ export default {
       console.log(formatted_date);
     },
     goToPost(id) {
-      this.$router.push(`/community/${id}`);
+      this.$router.push(`/c/community/${id}`);
+    },
+    goToUser(user) {
+      this.$router.push(`/u/${user}`);
     },
     mounted () {
       this.date_function()

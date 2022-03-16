@@ -7,7 +7,6 @@
       class="overflow-y-auto"
     >
       <v-container >
-        <!-- We need to figure out how to load more as you scroll-->
         <FullPost
           :id="this.post.id"
           :title="this.post.posttitle"

@@ -19,6 +19,10 @@ class Api {
     return axios.get(API_URL + `/post?postid=eq.${id}`);
   }
 
+  getCommunity(name) {
+    return axios.get(API_URL + `/community?communityname=eq.${name}`);
+  }
+
   addPost(post) {
     return axios.post(
       API_URL + "/POST",

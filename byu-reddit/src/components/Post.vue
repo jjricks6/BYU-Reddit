@@ -12,8 +12,8 @@
       <v-col cols=10>
         <v-row dense>
           <v-col>
-            <v-card-title @click="goToPost(id)">{{ title }}</v-card-title>
-            <v-card-subtitle>{{ community }} </v-card-subtitle>
+            <v-card-title @click="goToPost(community, id)">{{ title }}</v-card-title>
+            <v-card-subtitle @click="goToCommunity(community)">{{ community }} </v-card-subtitle>
           </v-col>
         </v-row>
       </v-col>
@@ -57,8 +57,11 @@ export default {
       var formatted_date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
       console.log(formatted_date);
     },
-    goToPost(id) {
-      this.$router.push(`/community/${id}`);
+    goToPost(community, id) {
+      this.$router.push(`/c/${community}/${id}`);
+    },
+    goToCommunity(community) {
+      this.$router.push(`/c/${community}`);
     },
     mounted () {
       this.date_function()

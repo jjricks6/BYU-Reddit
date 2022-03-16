@@ -43,14 +43,14 @@ const checkAuth = function(to, _, next) {
 const router = new VueRouter({
   routes: [
     { path: "/", component: Home },
-    { path: "/c/:id", component: Community },
+    { path: "/c/:communityname", component: Community },
     { path: "/login", component: Login },
     { path: "/logout", component: Logout },
     { path: "/register", component: Register },
-    { path: "/profile", component: Profile },
+    { path: "/u/:username", component: Profile },
     { path: "/explore", component: Explore },
     { path: "/search", component: Search },
-    { path: "/Community/:id", component: Post },
+    { path: "/c/:communityname/:id", component: Post },
 
     {
       path: "/feed",

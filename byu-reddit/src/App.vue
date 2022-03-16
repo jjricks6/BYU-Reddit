@@ -52,7 +52,7 @@ export default {
       this.$router.push('/login');
     },
     profilePage(){
-      this.$router.push('/profile');
+      this.$router.push(`/u/${this.$store.state.user.username}`);
     },
     goHome(){
       this.$router.push('/')
