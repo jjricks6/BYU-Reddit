@@ -3,22 +3,27 @@
 <template>
   <v-card elevation="10" min-width="1000">
     <v-container>
+      <v-card-title>
+          Create a new community
+        </v-card-title>
     <v-row>
-      <v-col center-allign justify cols='1'>
-        <v-avatar size='60'>
-          <img :src="'https://byu-reddit-media.s3.us-west-2.amazonaws.com/'+ community_picture"/>
-        </v-avatar>
+      <v-col>
       </v-col>
       <v-col cols=10>
         <v-row dense>
           <v-col>
             <v-card-title>
                 <v-text-field
-                    label="Post Title"
-                    v-model="title"
+                    label="CommunityName"
+                    v-model="communityName"
                 ></v-text-field>
             </v-card-title>
-            <v-card-subtitle>{{ community }} </v-card-subtitle>
+            <v-card-title>
+                <v-text-field
+                    label="Description"
+                    v-model="description"
+                ></v-text-field>
+            </v-card-title>
           </v-col>
         </v-row>
       </v-col>
@@ -36,6 +41,7 @@
                             accept="image/*"
                             label="Upload a picture"
                             v-model="picture">
+                            
                         </v-file-input>
                     </v-col>
                 </v-row>
@@ -62,14 +68,11 @@
 export default {
   methods:{
   },
-  props: {
-    community: String,
-    community_picture: String,
-  },
 
   data() {
     return {
-      title: "",
+      communityName: "",
+      Description:"",
       picture: null
     }
   }

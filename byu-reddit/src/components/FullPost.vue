@@ -42,7 +42,7 @@
       </v-col>
       <v-col>
         {{ num_comments }}
-        <v-btn icon @click="goToPost(community, id)">
+        <v-btn icon>
           <v-icon>mdi-comment-text-outline</v-icon>
         </v-btn>
       </v-col>
