@@ -22,6 +22,7 @@
         <div v-for="post in posts" :key="post.id"
         >
           <Post
+            :id="post.postid"
             :title="post.posttitle"
             :content="post.postcontent"
             :community="post.communityname"

@@ -3,7 +3,9 @@
     <v-app-bar
     hide-on-scroll
     >
-    <v-app-bar-nav-icon><v-icon large>mdi-alpha-y-circle-outline</v-icon></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon @click="goHome()">
+      <v-icon large>mdi-alpha-y-circle-outline</v-icon>
+    </v-app-bar-nav-icon>
 
       <v-toolbar-title>BYU REDDIT</v-toolbar-title>
 
@@ -15,13 +17,19 @@
       </v-btn>
 
       <!-- Profile -->
-      <v-btn 
-        icon
-        >
+      <v-btn v-if="isLoggedIn" icon @click="profilePage()">
         <v-avatar>
-          <img :src="'https://byu-reddit-media.s3.us-west-2.amazonaws.com/' + profile_picture"/>
+          <img :src="'https://byu-reddit-media.s3.us-west-2.amazonaws.com/' + this.$store.state.user.profilepicture"/>
         </v-avatar>
       </v-btn>
+      <div v-else>
+        <v-btn @click="loginPage()">
+          Login
+        </v-btn>
+        <v-btn @click="registerPage()">
+          Register
+        </v-btn>
+      </div>
 
       <!-- Options -->
       <v-btn icon>
@@ -36,6 +44,24 @@
 
 <script>
 export default {
+  computed: {
+    isLoggedIn : function(){ return this.$store.state.user != undefined }
+  },
+  methods:{
+    loginPage(){
+      this.$router.push('/login');
+    },
+    profilePage(){
+      this.$router.push('/profile');
+    },
+    goHome(){
+      this.$router.push('/')
+    },
+    async logout (){
+        await this.$store.dispatch('LogOut')
+        this.$router.push('/login')
+      }
+  },
   name: "App",
   components: {},
   data() {
