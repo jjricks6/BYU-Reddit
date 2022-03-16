@@ -14,6 +14,9 @@ class Api {
   getPost(id) {
     return axios.get(API_URL + `/POST?postid=eq.${id}`);
   }
+  getProfile() {
+    return axios.get(API_URL + `/USER?userid=eq.${3}`);
+  }
 
   addPost(post) {
     return axios.post(

@@ -1,4 +1,4 @@
-/* eslint-disable */
+<!-- eslint-disable -->
 
 <template>
   <v-card
@@ -35,7 +35,7 @@
           >
             <v-list-item-content>
               <v-list-item-title class="text-h6">
-                Marcus Obrien
+                {{ user[0].username}}
               </v-list-item-title>
               <v-list-item-subtitle>Network Engineer</v-list-item-subtitle>
             </v-list-item-content>
@@ -54,19 +54,20 @@ export default {
   components:{
 //    Post
   },
-  name: "HomePage",
+  name: "ProfilePage",
   data: function () {
     return {
       loading: false,
-      posts: [],
-      filter_items: ["Top", "Popular"]
+      user: [],
+      //filter_items: ["Top", "Popular"]
     };
   },
   created: function () {
     this.loading = true;
-    Api.getExplore().then((res) => {
-      this.posts = res.data;
+    Api.getProfile().then((res) => {
+      this.user = res.data;
       this.loading = false;
+      console.log(this.user);
     });
   },
 };
