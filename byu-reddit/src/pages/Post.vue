@@ -17,8 +17,10 @@
           :vote_score="this.post.post_votescore"
           :num_comments="this.post.num_comments"
         />
-        <!-- Insert comment component here. You will have ot pass in props just like we are doing with FullPost above-->
-        <Comments/>
+        <!-- change later to Comments.vue-->
+        <IndividualComment               
+          :comments="this.comments"
+        />                      
       </v-container>
     </v-sheet>
   </v-card>
@@ -27,12 +29,12 @@
 <script>
 import Api from "../api";
 import FullPost from "../components/FullPost.vue"
-import Comments from "../components/Comments.vue"
+import IndividualComment from "../components/IndividualComment.vue"  //change later to Comments.vue 
 
 export default {
   components:{
     FullPost,
-    Comments
+    IndividualComment            //change later to Comments.vue
   },
   name: "PostPage",
   data: function () {
@@ -49,7 +51,7 @@ export default {
     Api.getPost(this.$route.params.id).then((res) => {
       this.post = res.data[0];
       this.comments = res.data;
-      console.log(this.post)
+      //console.log(this.comments)
     });
   },
 };
