@@ -43,6 +43,7 @@
       </v-row>
     </v-img>
   <v-btn
+      v-if="isSameUser"
       class="mx-2"
       fab
       dark
@@ -52,6 +53,17 @@
       <v-icon dark>
         mdi-pencil
       </v-icon>
+      
+    </v-btn>
+    <v-btn
+      v-if="isSameUser"
+      large
+      dark
+      red
+      id = "delete"
+    >
+        Delete Profile
+      
     </v-btn>
   </v-card>
 </template>
@@ -61,6 +73,10 @@ import Api from "../api";
 //import Post from "../components/Post.vue"
 
 export default {
+  computed:{
+    isSameUser : function(){
+      return this.$store.state.user.username == this.user.username }
+  },
   components:{
 //    Post
   },
@@ -80,3 +96,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+  #delete {
+    background-color: red;
+  }
+
+</style>
