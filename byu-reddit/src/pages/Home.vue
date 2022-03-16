@@ -13,15 +13,6 @@
           </v-card-title>
         </v-row>
         <v-row>
-        <!-- Filter -->
-          <v-col cols='3'>
-            <v-select
-              :items="filter_items"
-              default="hot"
-              dense
-              prepend-icon="mdi-fire"
-            ></v-select>
-          </v-col>
         </v-row>
         <!-- We need to figure out how to load more as you scroll-->
         <div v-for="post in posts" :key="post.id"

@@ -7,18 +7,45 @@
                   <img :src="'https://byu-reddit-media.s3.us-west-2.amazonaws.com/' + community.communitypicture"/>
                 </v-avatar>
               </v-col>
-              <v-col cols=9>
+              <v-col cols=7>
                 <v-row dense>
                   <v-col>
                     <v-card-title><h1>{{ community.communityname }}</h1></v-card-title>
                     <v-card-subtitle>{{ community.description }}</v-card-subtitle>
                   </v-col>
                 </v-row>
-                <v-row>
-                  <v-col>
-                      
-                  </v-col>
-                </v-row>
+              </v-col>
+              <v-col cols="2">
+                <v-btn @click="overlay = !overlay">
+                  Add Post
+                  <v-icon>
+                    mdi-plus
+                  </v-icon>
+                </v-btn>
+                <v-overlay
+                  z-index="1"
+                  :value="overlay"
+                  opacity=".9"
+                  >
+                  <v-container>
+                    <v-row>
+                    <v-col cols="11">
+                      </v-col>
+                      <v-col cols="1">
+                        <v-btn icon>
+                            <v-icon @click="overlay = false">
+                                mdi-close
+                            </v-icon>
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                        <CreatePost
+                          :community="this.community.communityname"
+                          :community_picture="this.community.communitypicture"
+                        />
+                  </v-container>
+                  
+                </v-overlay>
               </v-col>
         </v-row>
       </v-container>
@@ -28,15 +55,6 @@
     >
       <v-container >
         <v-row>
-        <!-- Filter -->
-          <v-col cols='3'>
-            <v-select
-              :items="filter_items"
-              default="hot"
-              dense
-              prepend-icon="mdi-fire"
-            ></v-select>
-          </v-col>
         </v-row>
         <div v-for="post in posts" :key="post.id"
         >
@@ -59,14 +77,18 @@
 <script>
 import Api from "../api";
 import Post from "../components/Post.vue"
+import CreatePost from "../components/CreatePost.vue"
 
 export default {
   components:{
-    Post
+    Post,
+    CreatePost
   },
   name: "CommunityPage",
   data: function () {
     return {
+      overlay: false,
+      zIndex: 1,
       community: [],
       posts: [],
       filter_items: ["Top", "Popular"]

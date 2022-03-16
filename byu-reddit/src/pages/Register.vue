@@ -9,9 +9,9 @@
       <form name="form" @submit.prevent="handleRegister">
         <div>
           <div class="form-group">
-            <label for="username">Name</label>
+            <label for="username">Username</label>
             <input
-              v-model="name"
+              v-model="username"
               type="text"
               class="form-control"
               name="name"
@@ -61,7 +61,7 @@ export default {
   name: "RegisterPage",
   data() {
     return {
-      name: "",
+      username: "",
       email: "",
       password: "",
       loading: false,
@@ -85,7 +85,7 @@ export default {
       this.message = "";
       this.loading = true;
 
-      Api.signup(this.email, this.password, this.name)
+      Api.signup(this.email, this.password, this.username)
         .then(() => {
           this.$router.push("/login");
         })

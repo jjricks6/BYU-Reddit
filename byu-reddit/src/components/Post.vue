@@ -26,18 +26,23 @@
         :src="'https://byu-reddit-media.s3.us-west-2.amazonaws.com/'+ content" />
     </v-row>
     <v-row>
-      <v-col cols='2'>
-        <v-btn icon @click="vote_score--">
+      <v-col cols='2' v-if="isLoggedIn">
+        <v-btn icon @click="downvote(id, vote_score)">
           <v-icon>mdi-thumb-down-outline</v-icon>
         </v-btn>
         {{ vote_score }}
-        <v-btn icon @click="vote_score++">
+        <v-btn icon @click="upvote(id, vote_score)">
           <v-icon>mdi-thumb-up-outline</v-icon>
         </v-btn>
       </v-col>
+      <v-col cols='2' v-else>
+        <v-icon>mdi-thumb-down-outline</v-icon>
+        {{ vote_score }}
+        <v-icon>mdi-thumb-up-outline</v-icon>
+      </v-col>
       <v-col>
         {{ num_comments }}
-        <v-btn icon>
+        <v-btn icon @click="goToPost(community, id)">
           <v-icon>mdi-comment-text-outline</v-icon>
         </v-btn>
       </v-col>
@@ -47,24 +52,26 @@
 </template>
 
 <script>
-
+import Api from "../api";
 export default {
+  computed: {
+    isLoggedIn : function(){
+      return this.$store.state.user.username != undefined }
+  },
   methods:{
-    date_function: function () {
-      var currentDate = new Date();
-      console.log(currentDate);
-  
-      var formatted_date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
-      console.log(formatted_date);
-    },
     goToPost(community, id) {
       this.$router.push(`/c/${community}/${id}`);
     },
     goToCommunity(community) {
       this.$router.push(`/c/${community}`);
     },
-    mounted () {
-      this.date_function()
+    upvote(id, vote_score) {
+      vote_score = vote_score + 1
+      Api.votePost(id, vote_score)
+    },
+    downvote(id, vote_score) {
+      vote_score = vote_score - 1
+      Api.votePost(id, vote_score)
     }
   },
   props: {

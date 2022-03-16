@@ -6,7 +6,6 @@ import Vuex from 'vuex'
 import App from "./App.vue";
 import Home from "./pages/Home";
 import Feed from "./pages/Feed";
-import Explore from "./pages/Explore";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Register from "./pages/Register";
@@ -29,7 +28,7 @@ Vue.use(VueRouter);
 
 const checkAuth = function(to, _, next) {
   const token = getJwtToken();
-  if (token === undefined || token === "undefined" || token === null) {
+  if (token === undefined || token === "undefined" || token === null || store.state.user.username == undefined) {
     // redirect to login because we don't have token yet
     next({
       path: "/login",
@@ -48,7 +47,6 @@ const router = new VueRouter({
     { path: "/logout", component: Logout },
     { path: "/register", component: Register },
     { path: "/u/:username", component: Profile },
-    { path: "/explore", component: Explore },
     { path: "/search", component: Search },
     { path: "/c/:communityname/:id", component: Post },
 

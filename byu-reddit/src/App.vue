@@ -1,13 +1,11 @@
 <template>
   <div id="app">
-    <v-app-bar
-    hide-on-scroll
-    >
+    <v-app-bar>
     <v-app-bar-nav-icon @click="goHome()">
       <v-icon large>mdi-alpha-y-circle-outline</v-icon>
     </v-app-bar-nav-icon>
 
-      <v-toolbar-title>BYU REDDIT</v-toolbar-title>
+      <v-app-bar-title>BYU REDDIT</v-app-bar-title>
 
       <v-spacer></v-spacer>
 
@@ -28,10 +26,10 @@
         </v-btn>
       </div>
       <div v-else>
-        <v-btn @click="loginPage()">
+        <v-btn plain @click="loginPage()">
           Login
         </v-btn>
-        <v-btn @click="registerPage()">
+        <v-btn plain @click="registerPage()">
           Register
         </v-btn>
       </div>
@@ -40,6 +38,16 @@
       <v-btn icon>
         <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
+      <template v-slot:extension>
+         <v-tabs grow>
+          <v-tab @click="goHome()">
+            Explore
+          </v-tab>
+          <v-tab @click="goFeed()">
+            My Feed
+          </v-tab>
+      </v-tabs>
+      </template>
     </v-app-bar>
     <v-container>
       <router-view></router-view>
@@ -57,11 +65,17 @@ export default {
     loginPage(){
       this.$router.push('/login');
     },
+    registerPage(){
+      this.$router.push('/register');
+    },
     profilePage(){
       this.$router.push(`/u/${this.$store.state.user.username}`);
     },
     goHome(){
       this.$router.push('/')
+    },
+    goFeed(){
+      this.$router.push('/feed')
     },
     async logout (){
         this.$store.commit('logout')
