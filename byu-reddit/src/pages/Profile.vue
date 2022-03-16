@@ -25,7 +25,9 @@
             size="164"
             tile
           >
-            <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
+            <!--<v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img> -->
+            <v-img
+              :src="'https://byu-reddit-media.s3.us-west-2.amazonaws.com/' + this.$store.state.user.profilepicture" />
           </v-avatar>
         </v-col>
         <v-col class="py-0">
@@ -35,14 +37,25 @@
           >
             <v-list-item-content>
               <v-list-item-title class="text-h6">
-                {{ user[0].username}}
+                {{this.$store.state.user.username}}
               </v-list-item-title>
-              <v-list-item-subtitle>Network Engineer</v-list-item-subtitle>
+              <v-list-item-subtitle>{{this.$store.state.user.bio}}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-col>
       </v-row>
     </v-img>
+  <v-btn
+      class="mx-2"
+      fab
+      dark
+      large
+      color="cyan"
+    >
+      <v-icon dark>
+        mdi-pencil
+      </v-icon>
+    </v-btn>
   </v-card>
 </template>
 
