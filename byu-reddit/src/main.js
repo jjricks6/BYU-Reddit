@@ -22,6 +22,11 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import { getJwtToken } from "./auth";
 import vuetify from './plugins/vuetify'
+import VueMoment from "vue-moment";
+import moment from "moment";
+
+Vue.use(vuetify);
+Vue.use(VueMoment, moment);
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
