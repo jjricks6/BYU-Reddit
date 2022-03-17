@@ -17,10 +17,18 @@
           :vote_score="this.post.post_votescore"
           :num_comments="this.post.num_comments"
         />
-        <!-- change later to Comments.vue-->
-        <IndividualComment               
-          :comments="this.comments"
-        />                      
+        <!-- change later to Comments -->
+        <div v-for="comment in comments" :key="comment.commentid"
+        >
+          <IndividualComment
+            :commenttext="comment.commenttext"
+            :commenter="comment.commenter"
+            :parent_commentid="comment.parent_commentid"
+            :comment_votescore="comment.comment_votescore"
+            :commentid="comment.commentid"
+
+          />
+        </div>                  
       </v-container>
     </v-sheet>
   </v-card>
@@ -29,11 +37,13 @@
 <script>
 import Api from "../api";
 import FullPost from "../components/FullPost.vue"
+//import Comments from "../components/Comments.vue" 
 import IndividualComment from "../components/IndividualComment.vue"  //change later to Comments.vue 
 
 export default {
   components:{
     FullPost,
+    //Comments
     IndividualComment            //change later to Comments.vue
   },
   name: "PostPage",
@@ -51,7 +61,7 @@ export default {
     Api.getPost(this.$route.params.id).then((res) => {
       this.post = res.data[0];
       this.comments = res.data;
-      //console.log(this.comments)
+      console.log(this.comments)
     });
   },
 };

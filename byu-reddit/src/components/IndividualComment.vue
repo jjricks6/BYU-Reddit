@@ -4,8 +4,31 @@
   <v-card elevation="0" min-width="300">
     <v-container>
         <div>
-            hello why doesnt this work
-        </div>    
+            <!--
+            <v-card-title @click="goToUser(user)">{{ Comment[1].commenter }}</v-card-title>
+                       -->
+
+                    <v-card-text @click="goToUser(commenter)">{{ commenter }}</v-card-text>
+                    <v-card-text >{{ commenttext }}</v-card-text>
+
+
+        <v-col cols='2' v-if="isLoggedIn">
+          <v-btn icon @click="downvote(commentid, comment_votescore)">
+          <v-icon>mdi-thumb-down-outline</v-icon>
+         </v-btn>
+          <v-card-text >{{ comment_votescore }}</v-card-text>
+          <v-btn icon @click="upvote(commentid, comment_votescore)">
+          <v-icon>mdi-thumb-up-outline</v-icon>
+          </v-btn>  
+        </v-col>
+        <v-col cols='2' v-else>
+          
+          <v-icon>mdi-thumb-down-outline</v-icon>
+          <v-card-text >{{ comment_votescore }}</v-card-text>
+          
+          <v-icon>mdi-thumb-up-outline</v-icon>            
+        </v-col>
+          </div>    
     </v-container>
   </v-card>
 </template>
@@ -18,21 +41,45 @@ export default {
       return this.$store.state.user.username != undefined }
   },
   methods:{
-    goToPost(community, id) {
-    
+    goToUser(commenter) {
+      this.$router.push(`/u/${commenter}`);
+    },
+    upvote(commentid, comment_votescore) {
+      comment_votescore = comment_votescore + 1
+      Api.voteComment(commentid, comment_votescore)
+    },
+    downvote(commentid, comment_votescore) {
+      comment_votescore = comment_votescore - 1
+      Api.voteComment(commentid, comment_votescore)
     }
   },
   props: {
-    Comment: String
+    commenttext: String,
+    commenter: String,
+    parent_commentid: Number,
+    comment_votescore: Number,
+    commentid: Number
+
   },
 
   data() {
     return {
       
     }
+  },
+  /*
+  created: function () {
+    console.log(this.commenttext);
   }
+*/
 }
 </script>
+
+
+
+
+
+
 
 <style>
 .buttons {

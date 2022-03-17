@@ -37,6 +37,16 @@ class Api {
     })
 
   }
+  voteComment(commentid, comment_votescore) {
+    return axios.patch(API_URL + `/COMMENT?commentid=eq.${commentid}`, 
+    {
+        "votescore": comment_votescore
+    },
+    {
+      headers: authHeader()
+    })
+
+  }
 
   addPost(post) {
     return axios.post(
