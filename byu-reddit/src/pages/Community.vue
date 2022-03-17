@@ -1,4 +1,5 @@
 <template>
+<v-app>
   <v-card>
       <v-container>
         <v-row>
@@ -16,7 +17,13 @@
                 </v-row>
               </v-col>
               <v-col cols="2">
-                <v-btn @click="overlay = !overlay">
+                <v-btn v-if="isLoggedIn" @click="overlay = !overlay">
+                  Add Post
+                  <v-icon>
+                    mdi-plus
+                  </v-icon>
+                </v-btn>
+                <v-btn v-else @click="goToLogin()">
                   Add Post
                   <v-icon>
                     mdi-plus
@@ -27,24 +34,22 @@
                   :value="overlay"
                   opacity=".9"
                   >
-                  <v-container>
-                    <v-row>
-                    <v-col cols="11">
-                      </v-col>
-                      <v-col cols="1">
-                        <v-btn icon>
-                            <v-icon @click="overlay = false">
-                                mdi-close
-                            </v-icon>
-                        </v-btn>
-                      </v-col>
-                    </v-row>
-                        <CreatePost
-                          :community="this.community.communityname"
-                          :community_picture="this.community.communitypicture"
-                        />
-                  </v-container>
-                  
+                  <v-row>
+                  <v-col cols="11">
+                    </v-col>
+                    <v-col cols="1">
+                      <v-btn icon>
+                          <v-icon @click="overlay = false">
+                              mdi-close
+                          </v-icon>
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                      <CreatePost
+                        :community="this.community.communityname"
+                        :community_picture="this.community.communitypicture"
+                        :communityid="this.community.communityid"
+                      />
                 </v-overlay>
               </v-col>
         </v-row>
@@ -72,6 +77,7 @@
       </v-container>
     </v-sheet>
   </v-card>
+</v-app>
 </template>
 
 <script>
@@ -84,7 +90,16 @@ export default {
     Post,
     CreatePost
   },
+  computed: {
+    isLoggedIn : function(){
+      return this.$store.state.user.username != undefined }
+  },
   name: "CommunityPage",
+  methods: {
+    goToLogin() {
+      this.$router.push(`/Login`);
+    },
+  },
   data: function () {
     return {
       overlay: false,
