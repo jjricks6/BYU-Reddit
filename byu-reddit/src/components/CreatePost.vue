@@ -1,6 +1,7 @@
 <!-- eslint-disable -->
 
 <template>
+<v-app>
   <v-card elevation="10" min-width="1000">
     <v-container>
     <v-row>
@@ -13,10 +14,10 @@
         <v-row dense>
           <v-col>
             <v-card-title>
-                <v-text-field
-                    label="Post Title"
-                    v-model="title"
-                ></v-text-field>
+              <v-text-field
+                label="Post Title"
+                v-model="title"
+              ></v-text-field>
             </v-card-title>
             <v-card-subtitle>{{ community }} </v-card-subtitle>
           </v-col>
@@ -26,51 +27,59 @@
       </v-col>
     </v-row>
     <v-row>
-        <v-card min-width="1000">
-            <v-container>
-                <v-row>
-                    <v-col cols="1">
-                    </v-col>
-                    <v-col cols="10">
-                        <v-file-input
-                            accept="image/*"
-                            label="Upload a picture"
-                            v-model="picture">
-                        </v-file-input>
-                    </v-col>
-                </v-row>
-                <v-row>
-                </v-row>
-                <v-row>
-                    <v-col cols="10">
-                    </v-col>
-                    <v-col cols="2">
-                        <v-btn>
-                            Submit
-                        </v-btn>
-                    </v-col>
-                </v-row>
-            </v-container>
-        </v-card>
+      <v-container>
+        <v-row>
+          <v-col cols="1">
+          </v-col>
+          <v-col cols="10">
+            <v-select data-app
+              v-model="picture"
+              :items="items"
+              label="Picture"
+            ></v-select>
+          </v-col>
+        </v-row>
+        <v-row>
+        </v-row>
+        <v-row>
+          <v-col cols="10">
+          </v-col>
+          <v-col cols="2">
+            <v-btn @click="createPost(title, picture, communityid)">
+              Submit
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-row>
     </v-container>
   </v-card>
+</v-app>
 </template>
 
 <script>
+import Api from "../api";
 
 export default {
   methods:{
+    createPost(title, picture, communityid){
+      Api.createPost(title, picture, communityid, this.$store.state.user.userid).then(() => {
+        this.$router.push(`/c/${this.community}/`);
+      });
+      
+    }
   },
   props: {
     community: String,
     community_picture: String,
+    communityid: Number
   },
 
   data() {
     return {
       title: "",
-      picture: null
+      picture: null,
+      items: ['BYU_Logo.png', 'Databases.png', 'Default.png', 'Dope.png', 'f12020.jpg', 'post1.jpg', 'rum.png']
     }
   }
 }

@@ -15,7 +15,10 @@
           </v-col>
           <v-spacer></v-spacer>
           <v-col cols="2.5">
-            <v-btn plain @click="overlay = !overlay">
+            <v-btn plain v-if="isLoggedIn" @click="overlay = !overlay">
+              Create Community
+            </v-btn>
+            <v-btn plain v-else @click="goToLogin()">
               Create Community
             </v-btn>
             <v-overlay
@@ -70,6 +73,15 @@ export default {
   components:{
     Post,
     CreateCommunity
+  },
+  methods: {
+    goToLogin() {
+      this.$router.push(`/Login`);
+    },
+  },
+  computed: {
+    isLoggedIn : function(){
+      return this.$store.state.user.username != undefined }
   },
   name: "HomePage",
   data: function () {

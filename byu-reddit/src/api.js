@@ -30,7 +30,35 @@ class Api {
   votePost(id, vote_score) {
     return axios.patch(API_URL + `/POST?postid=eq.${id}`, 
     {
-        "votescore": vote_score
+      "votescore": vote_score
+    },
+    {
+      headers: authHeader()
+    })
+
+  }
+
+  createPost(title, picture, communityid, userid) {
+    return axios.post(API_URL + `/POST`, 
+    {
+      "title": title,
+      "communityid": communityid,
+      "content": picture,
+      "userid": userid,
+      "votescore": 0
+    },
+    {
+      headers: authHeader()
+    })
+
+  }
+
+  createCommunity(communityname, description, communitypicture) {
+    return axios.post(API_URL + `/COMMUNITY`, 
+    {
+      "communityname": communityname,
+      "description": description,
+      "communitypicture": communitypicture
     },
     {
       headers: authHeader()

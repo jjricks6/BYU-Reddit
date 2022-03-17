@@ -40,8 +40,14 @@
         {{ vote_score }}
         <v-icon>mdi-thumb-up-outline</v-icon>
       </v-col>
-      <v-col>
+      <v-col v-if="num_comments != null">
         {{ num_comments }}
+        <v-btn icon @click="goToPost(community, id)">
+          <v-icon>mdi-comment-text-outline</v-icon>
+        </v-btn>
+      </v-col>
+      <v-col v-else>
+        0
         <v-btn icon @click="goToPost(community, id)">
           <v-icon>mdi-comment-text-outline</v-icon>
         </v-btn>
@@ -87,7 +93,6 @@ export default {
 
   data() {
     return {
-      
     }
   }
 }
