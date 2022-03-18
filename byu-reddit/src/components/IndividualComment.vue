@@ -26,7 +26,12 @@
 
                   <v-icon small>mdi-thumb-up-outline</v-icon>  
                 </v-col>
- 
+
+                <v-col cols="10" v-if="isAdmin">
+                  <v-btn icon @click="deleteComment(commentid)">
+                    <v-icon >mdi-trash-can</v-icon>
+                  </v-btn>
+                </v-col>
         </v-row>
       </div>
     </v-container>
@@ -40,9 +45,12 @@ export default {
     isLoggedIn: function () {
       return this.$store.state.user.username != undefined;
     },
-    isParentComment: function () {
+    /*isParentComment: function () {
       return this.$store.state.comment.parent_commentid != null;
-    },
+    },*/
+    isAdmin : function(){
+      return this.$store.state.user.role == "admin" 
+    }
   },
   methods: {
     goToUser(commenter) {
@@ -56,6 +64,9 @@ export default {
       comment_votescore = comment_votescore - 1;
       Api.voteComment(commentid, comment_votescore);
     },
+    deleteComment(commentid) {
+      Api.deleteComment(commentid)
+    }
   },
   props: {
     commenttext: String,
