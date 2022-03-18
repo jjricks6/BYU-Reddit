@@ -11,7 +11,6 @@ import Logout from "./pages/Logout";
 import Register from "./pages/Register";
 import Community from "./pages/Community";
 import Profile from "./pages/Profile";
-import Search from "./pages/Search";
 import Post from "./pages/Post";
 
 Vue.config.productionTip = false;
@@ -52,7 +51,6 @@ const router = new VueRouter({
     { path: "/logout", component: Logout },
     { path: "/register", component: Register },
     { path: "/u/:username", component: Profile },
-    { path: "/search", component: Search },
     { path: "/c/:communityname/:id", component: Post },
 
     {

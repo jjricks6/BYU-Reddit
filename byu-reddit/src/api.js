@@ -88,7 +88,7 @@ class Api {
 
   }
   deleteComment(commentid) {
-    return axios.delete(API_URL + `/COMMENT`, 
+    return axios.delete(API_URL + `/COMMENT?commentid=eq.${commentid}`, 
     {
       "commentid": commentid,
     },

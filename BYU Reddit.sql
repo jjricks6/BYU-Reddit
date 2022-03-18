@@ -7,6 +7,7 @@ CREATE TABLE "USER"
   Role varchar NOT NULL,
   Bio varchar,
   UserID serial NOT NULL,
+  profilepicture varchar NOT NULL,
   PRIMARY KEY (UserID),
   UNIQUE (UserName)
 );
@@ -14,6 +15,7 @@ CREATE TABLE "USER"
 CREATE TABLE "COMMUNITY"
 (
   CommunityName varchar NOT NULL,
+  communitypicture varcahr NOT NULL,
   Description varchar,
   CommunityID serial NOT NULL,
   CreateDate date NOT NULL,
@@ -24,7 +26,8 @@ CREATE TABLE "COMMUNITY"
 CREATE TABLE "POST"
 (
   PostID serial NOT NULL,
-  PostContent varchar NOT NULL,
+  title varchar NOT NULL,
+  content varchar NOT NULL,
   VoteScore INT NOT NULL,
   PostDateTime timestamp NOT NULL,
   CommunityID serial NOT NULL,
