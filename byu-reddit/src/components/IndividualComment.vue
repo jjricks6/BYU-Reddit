@@ -15,7 +15,7 @@
                   <v-btn icon @click="downvote(commentid, comment_votescore)">
                     <v-icon small>mdi-thumb-down-outline</v-icon>
                   </v-btn>
-                  <v-card-text>{{ comment_votescore }}</v-card-text>
+                  {{ comment_votescore }}
                   <v-btn icon @click="upvote(commentid, comment_votescore)">
                     <v-icon small>mdi-thumb-up-outline</v-icon>
                   </v-btn>
