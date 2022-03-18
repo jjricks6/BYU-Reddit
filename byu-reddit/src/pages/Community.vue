@@ -111,7 +111,7 @@ export default {
   },
   created: function () {
     this.loading = true;
-    console.log(this.$route)
+    //console.log(this.$route)
     Api.getCommunity(this.$route.params.communityname).then((res) => {
       this.community = res.data[0];
       this.posts = res.data;

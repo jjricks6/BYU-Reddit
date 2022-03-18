@@ -65,11 +65,11 @@ export default {
   },
   created: function () {
     this.loading = true;
-    console.log(this.$route)
+    //console.log(this.$route)
     Api.getPost(this.$route.params.id).then((res) => {
       this.post = res.data[0];
       this.comments = res.data;
-      console.log(this.comments)
+      //console.log(this.comments)
     });
   },
 };
