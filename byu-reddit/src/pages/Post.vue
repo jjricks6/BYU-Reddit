@@ -28,7 +28,12 @@
             :commentid="comment.commentid"
 
           />
-        </div>                  
+        </div>
+        <div v-if="isLoggedIn">
+          <CreateComment
+            :postid="post.postid"
+          />
+        </div>            
       </v-container>
     </v-sheet>
   </v-card>
@@ -37,14 +42,18 @@
 <script>
 import Api from "../api";
 import FullPost from "../components/FullPost.vue"
-//import Comments from "../components/Comments.vue" 
-import IndividualComment from "../components/IndividualComment.vue"  //change later to Comments.vue 
+import IndividualComment from "../components/IndividualComment.vue"
+import CreateComment from "../components/CreateComment.vue"
 
 export default {
   components:{
     FullPost,
-    //Comments
-    IndividualComment            //change later to Comments.vue
+    IndividualComment,
+    CreateComment
+  },
+  computed: {
+    isLoggedIn : function(){
+      return this.$store.state.user.username != undefined }
   },
   name: "PostPage",
   data: function () {

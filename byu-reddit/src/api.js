@@ -53,6 +53,20 @@ class Api {
 
   }
 
+  addComment(comment, postid, userid) {
+    return axios.post(API_URL + `/COMMENT`, 
+    {
+      "commenttext": comment,
+      "postid": postid,
+      "userid": userid,
+      "votescore": 0
+    },
+    {
+      headers: authHeader()
+    })
+
+  }
+
   createCommunity(communityname, description, communitypicture) {
     return axios.post(API_URL + `/COMMUNITY`, 
     {
