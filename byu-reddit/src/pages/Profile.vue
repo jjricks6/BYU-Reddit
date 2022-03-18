@@ -61,7 +61,7 @@
       large
       dark
       red
-      id = "delete"
+      id = "delete" @click="deleteUser()"
     >
         Delete Profile
       
@@ -101,10 +101,19 @@ export default {
       Api.changeBio(userid, newBio)
     }
   },
+    deleteUser() {
+      Api.deleteUser(this.$store.state.user.userid).then(() => {
+        this.$router.push(`/Login`);
+        });
+    },
+  
   computed:{
     isSameUser : function(){
-      return this.$store.state.user.username == this.user.username }
+      return this.$store.state.user.username == this.user.username }, 
+    isAdmin : function(){
+      return this.$store.state.user.role == "admin" }
   },
+
   components:{
 //    Post
   },

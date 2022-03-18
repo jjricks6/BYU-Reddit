@@ -77,6 +77,27 @@ class Api {
 
   }
 
+  deleteUser(userid) {
+    return axios.delete(API_URL + `/USER`, 
+    {
+      "userid": userid,
+    },
+    {
+      headers: authHeader()
+    })
+
+  }
+  deleteComment(commentid) {
+    return axios.delete(API_URL + `/COMMENT`, 
+    {
+      "commentid": commentid,
+    },
+    {
+      headers: authHeader()
+    })
+
+  }
+
   createCommunity(communityname, description, communitypicture) {
     return axios.post(API_URL + `/COMMUNITY`, 
     {

@@ -26,7 +26,6 @@
             :parent_commentid="comment.parent_commentid"
             :comment_votescore="comment.comment_votescore"
             :commentid="comment.commentid"
-
           />
         </div>
         <div v-if="isLoggedIn">
