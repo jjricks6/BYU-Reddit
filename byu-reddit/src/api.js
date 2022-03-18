@@ -69,7 +69,8 @@ class Api {
       "commenttext": comment,
       "postid": postid,
       "userid": userid,
-      "votescore": 0
+      "votescore": 0,
+      "parent_commentid": null
     },
     {
       headers: authHeader()
