@@ -2,33 +2,33 @@
 
 <template>
   <v-card elevation="0" min-width="300">
-    <v-container>
-        <div>
-            <!--
-            <v-card-title @click="goToUser(user)">{{ Comment[1].commenter }}</v-card-title>
-                       -->
+    <v-container >
+      <div>
+        
 
-                    <v-card-text @click="goToUser(commenter)">{{ commenter }}</v-card-text>
-                    <v-card-text >{{ commenttext }}</v-card-text>
+        <v-card-text @click="goToUser(commenter)">{{ commenter }}</v-card-text>
+        {{ commenttext }}
+        <br><br>
+        <v-row>
 
+              <v-col cols="2" v-if="isLoggedIn">
+                  <v-btn icon @click="downvote(commentid, comment_votescore)">
+                    <v-icon small>mdi-thumb-down-outline</v-icon>
+                  </v-btn>
+                  <v-card-text>{{ comment_votescore }}</v-card-text>
+                  <v-btn icon @click="upvote(commentid, comment_votescore)">
+                    <v-icon small>mdi-thumb-up-outline</v-icon>
+                  </v-btn>
+                </v-col>
+                <v-col cols="2" v-else>
+                  <v-icon small>mdi-thumb-down-outline</v-icon>
+                  {{ comment_votescore }}
 
-        <v-col cols='2' v-if="isLoggedIn">
-          <v-btn icon @click="downvote(commentid, comment_votescore)">
-          <v-icon>mdi-thumb-down-outline</v-icon>
-         </v-btn>
-          <v-card-text >{{ comment_votescore }}</v-card-text>
-          <v-btn icon @click="upvote(commentid, comment_votescore)">
-          <v-icon>mdi-thumb-up-outline</v-icon>
-          </v-btn>  
-        </v-col>
-        <v-col cols='2' v-else>
-          
-          <v-icon>mdi-thumb-down-outline</v-icon>
-          <v-card-text >{{ comment_votescore }}</v-card-text>
-          
-          <v-icon>mdi-thumb-up-outline</v-icon>            
-        </v-col>
-          </div>    
+                  <v-icon small>mdi-thumb-up-outline</v-icon>  
+                </v-col>
+ 
+        </v-row>
+      </div>
     </v-container>
   </v-card>
 </template>
@@ -37,42 +37,43 @@
 import Api from "../api";
 export default {
   computed: {
-    isLoggedIn : function(){
-      return this.$store.state.user.username != undefined }
+    isLoggedIn: function () {
+      return this.$store.state.user.username != undefined;
+    },
+    isParentComment: function () {
+      return this.$store.state.comment.parent_commentid != null;
+    },
   },
-  methods:{
+  methods: {
     goToUser(commenter) {
       this.$router.push(`/u/${commenter}`);
     },
     upvote(commentid, comment_votescore) {
-      comment_votescore = comment_votescore + 1
-      Api.voteComment(commentid, comment_votescore)
+      comment_votescore = comment_votescore + 1;
+      Api.voteComment(commentid, comment_votescore);
     },
     downvote(commentid, comment_votescore) {
-      comment_votescore = comment_votescore - 1
-      Api.voteComment(commentid, comment_votescore)
-    }
+      comment_votescore = comment_votescore - 1;
+      Api.voteComment(commentid, comment_votescore);
+    },
   },
   props: {
     commenttext: String,
     commenter: String,
     parent_commentid: Number,
     comment_votescore: Number,
-    commentid: Number
-
+    commentid: Number,
   },
 
   data() {
-    return {
-      
-    }
+    return {};
   },
   /*
   created: function () {
     console.log(this.commenttext);
   }
 */
-}
+};
 </script>
 
 
@@ -93,11 +94,11 @@ export default {
 .missing-data {
   font-weight: lighter;
   font-size: 24px;
-  color: #CCCCCC;
+  color: #cccccc;
 }
 
 .time {
-  color: #a0a0a0
+  color: #a0a0a0;
 }
 
 @media only screen and (max-width: 600px) {
@@ -108,7 +109,6 @@ export default {
     justify-content: center;
     text-align: center;
   }
-
 }
 </style>
 
