@@ -89,14 +89,7 @@ class Api {
 
   }
   deleteComment(commentid) {
-    return axios.delete(API_URL + `/COMMENT?commentid=eq.${commentid}`, 
-    {
-      "commentid": commentid,
-    },
-    {
-      headers: authHeader()
-    })
-
+    return axios.delete(API_URL + `/COMMENT?commentid=eq.${commentid}`)
   }
 
   createCommunity(communityname, description, communitypicture) {
