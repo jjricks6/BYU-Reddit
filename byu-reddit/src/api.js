@@ -37,6 +37,16 @@ class Api {
     })
 
   }
+  changeBio(userid, newBio) {
+    return axios.patch(API_URL + `/USER?userid=eq.${userid}`, 
+    {
+      "bio": newBio
+    },
+    {
+      headers: authHeader()
+    })
+
+  }
 
   createPost(title, picture, communityid, userid) {
     return axios.post(API_URL + `/POST`, 

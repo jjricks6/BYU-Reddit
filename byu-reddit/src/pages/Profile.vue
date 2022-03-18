@@ -44,6 +44,7 @@
     </v-img>
   <v-btn
       v-if="isSameUser"
+      @click="edit = true"
       class="mx-2"
       fab
       dark
@@ -55,7 +56,7 @@
       </v-icon>
       
     </v-btn>
-    <v-btn
+    <!--<v-btn
       v-if="isSameUser"
       large
       dark
@@ -64,7 +65,29 @@
     >
         Delete Profile
       
-    </v-btn>
+    </v-btn>-->
+    <v-card elevation="0" min-width="300" v-if="edit">
+    <v-container>
+      <v-row>
+        <v-col cols="1">
+        </v-col>
+        <v-col cols="10">
+          <v-text-field
+          label="New Bio"
+          v-model="newBio"
+          >
+          </v-text-field> 
+        </v-col>
+        <v-col cols="1">
+          <v-btn icon @click="changeBio(user.userid, newBio)">
+            <v-icon>
+              mdi-send
+            </v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-card>
   </v-card>
 </template>
 
@@ -73,6 +96,11 @@ import Api from "../api";
 //import Post from "../components/Post.vue"
 
 export default {
+  methods:{
+    changeBio(userid, newBio) {
+      Api.changeBio(userid, newBio)
+    }
+  },
   computed:{
     isSameUser : function(){
       return this.$store.state.user.username == this.user.username }
@@ -85,6 +113,8 @@ export default {
     return {
       loading: false,
       user: [],
+      edit: false,
+      newBio: "",
       //filter_items: ["Top", "Popular"]
     };
   },
@@ -92,6 +122,7 @@ export default {
     this.loading = true;
     Api.getProfile(this.$route.params.username).then((res) => {
       this.user = res.data[0];
+      this.newBio = this.user.bio;
     });
   },
 };
