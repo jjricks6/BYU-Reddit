@@ -66,7 +66,7 @@ export default {
       Api.login(this.email, this.password)
         .then((res) => {
           setJwtToken(res.data[0].token);
-          console.log(res.data);
+          //console.log(res.data);
           Api.getUser(this.email).then((res) => {
             this.$store.commit('setUser', res.data[0])
           });
@@ -75,7 +75,7 @@ export default {
             this.$router.push(this.$route.params.nextUrl);
           } else {
             this.$router.push("/");
-            console.log(this.$user);
+            //console.log(this.$user);
           }
         })
         .catch((error) => {
